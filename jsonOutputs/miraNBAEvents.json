@@ -1,0 +1,825 @@
+{
+    "odds_data": {
+        "Game 1": {
+            "away_team": "Dallas Mavericks",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Dallas Mavericks": 1.22,
+                        "Utah Jazz": 4.6
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:03",
+                    "name": "BetOnline.ag",
+                    "odds": {
+                        "Dallas Mavericks": 1.23,
+                        "Utah Jazz": 4.6
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:12",
+                    "name": "LowVig.ag",
+                    "odds": {
+                        "Dallas Mavericks": 1.23,
+                        "Utah Jazz": 4.6
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Dallas Mavericks": 1.23,
+                        "Utah Jazz": 4.4
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:32",
+                    "name": "Caesars",
+                    "odds": {
+                        "Dallas Mavericks": 1.22,
+                        "Utah Jazz": 4.45
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:39",
+                    "name": "BetMGM",
+                    "odds": {
+                        "Dallas Mavericks": 1.22,
+                        "Utah Jazz": 4.5
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Dallas Mavericks": 1.22,
+                        "Utah Jazz": 4.34
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:20",
+                    "name": "Bovada",
+                    "odds": {
+                        "Dallas Mavericks": 1.23,
+                        "Utah Jazz": 4.25
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Dallas Mavericks": 1.23,
+                        "Utah Jazz": 4.4
+                    }
+                }
+            ],
+            "commence_time": "2024-11-15 02:10:00",
+            "home_team": "Utah Jazz",
+            "missing_bookmakers": []
+        },
+        "Game 10": {
+            "away_team": "Los Angeles Clippers",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Houston Rockets": 1.56,
+                        "Los Angeles Clippers": 2.5
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Houston Rockets": 1.5,
+                        "Los Angeles Clippers": 2.68
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Houston Rockets": 1.54,
+                        "Los Angeles Clippers": 2.55
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 01:00:00",
+            "home_team": "Houston Rockets",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "MyBookie.ag",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 11": {
+            "away_team": "Phoenix Suns",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Oklahoma City Thunder": 1.34,
+                        "Phoenix Suns": 3.35
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Oklahoma City Thunder": 1.35,
+                        "Phoenix Suns": 3.23
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Oklahoma City Thunder": 1.36,
+                        "Phoenix Suns": 3.25
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Oklahoma City Thunder": 1.38,
+                        "Phoenix Suns": 3.1
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 01:00:00",
+            "home_team": "Oklahoma City Thunder",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 12": {
+            "away_team": "Memphis Grizzlies",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Golden State Warriors": 1.27,
+                        "Memphis Grizzlies": 3.95
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Golden State Warriors": 1.27,
+                        "Memphis Grizzlies": 3.79
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Golden State Warriors": 1.27,
+                        "Memphis Grizzlies": 3.95
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Golden State Warriors": 1.26,
+                        "Memphis Grizzlies": 4.0
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 03:00:00",
+            "home_team": "Golden State Warriors",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 13": {
+            "away_team": "Minnesota Timberwolves",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Minnesota Timberwolves": 1.93,
+                        "Sacramento Kings": 1.89
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Minnesota Timberwolves": 1.95,
+                        "Sacramento Kings": 1.86
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Minnesota Timberwolves": 2.0,
+                        "Sacramento Kings": 1.85
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Minnesota Timberwolves": 1.97,
+                        "Sacramento Kings": 1.85
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 03:00:00",
+            "home_team": "Sacramento Kings",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 14": {
+            "away_team": "San Antonio Spurs",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "New York Knicks": 1.24,
+                        "San Antonio Spurs": 4.3
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "New York Knicks": 1.23,
+                        "San Antonio Spurs": 4.24
+                    }
+                }
+            ],
+            "commence_time": "2024-12-25 17:00:00",
+            "home_team": "New York Knicks",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetRivers",
+                "BetOnline.ag",
+                "Caesars",
+                "FanDuel",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 15": {
+            "away_team": "Minnesota Timberwolves",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Dallas Mavericks": 1.65,
+                        "Minnesota Timberwolves": 2.3
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:32",
+                    "name": "Caesars",
+                    "odds": {
+                        "Dallas Mavericks": 1.65,
+                        "Minnesota Timberwolves": 2.3
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Dallas Mavericks": 1.63,
+                        "Minnesota Timberwolves": 2.3
+                    }
+                }
+            ],
+            "commence_time": "2024-12-25 19:30:00",
+            "home_team": "Dallas Mavericks",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetRivers",
+                "BetOnline.ag",
+                "FanDuel",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 16": {
+            "away_team": "Philadelphia 76ers",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Boston Celtics": 1.4,
+                        "Philadelphia 76ers": 3.05
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:32",
+                    "name": "Caesars",
+                    "odds": {
+                        "Boston Celtics": 1.38,
+                        "Philadelphia 76ers": 3.1
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Boston Celtics": 1.43,
+                        "Philadelphia 76ers": 2.84
+                    }
+                }
+            ],
+            "commence_time": "2024-12-25 22:00:00",
+            "home_team": "Boston Celtics",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetRivers",
+                "BetOnline.ag",
+                "FanDuel",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 17": {
+            "away_team": "Los Angeles Lakers",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Golden State Warriors": 1.57,
+                        "Los Angeles Lakers": 2.45
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:32",
+                    "name": "Caesars",
+                    "odds": {
+                        "Golden State Warriors": 1.61,
+                        "Los Angeles Lakers": 2.4
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Golden State Warriors": 1.6,
+                        "Los Angeles Lakers": 2.34
+                    }
+                }
+            ],
+            "commence_time": "2024-12-26 01:00:00",
+            "home_team": "Golden State Warriors",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetRivers",
+                "BetOnline.ag",
+                "FanDuel",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 18": {
+            "away_team": "Denver Nuggets",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Denver Nuggets": 2.2,
+                        "Phoenix Suns": 1.7
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:32",
+                    "name": "Caesars",
+                    "odds": {
+                        "Denver Nuggets": 2.18,
+                        "Phoenix Suns": 1.71
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Denver Nuggets": 2.14,
+                        "Phoenix Suns": 1.71
+                    }
+                }
+            ],
+            "commence_time": "2024-12-26 03:30:00",
+            "home_team": "Phoenix Suns",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetRivers",
+                "BetOnline.ag",
+                "FanDuel",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 2": {
+            "away_team": "Detroit Pistons",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Detroit Pistons": 2.2,
+                        "Toronto Raptors": 1.7
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Detroit Pistons": 2.06,
+                        "Toronto Raptors": 1.77
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Detroit Pistons": 2.16,
+                        "Toronto Raptors": 1.74
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Detroit Pistons": 2.1,
+                        "Toronto Raptors": 1.77
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:00:00",
+            "home_team": "Toronto Raptors",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 3": {
+            "away_team": "Miami Heat",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Indiana Pacers": 1.68,
+                        "Miami Heat": 2.24
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Indiana Pacers": 1.71,
+                        "Miami Heat": 2.15
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Indiana Pacers": 1.61,
+                        "Miami Heat": 2.38
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Indiana Pacers": 1.62,
+                        "Miami Heat": 2.35
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:00:00",
+            "home_team": "Indiana Pacers",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 4": {
+            "away_team": "Philadelphia 76ers",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Orlando Magic": 2.3,
+                        "Philadelphia 76ers": 1.65
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Orlando Magic": 2.23,
+                        "Philadelphia 76ers": 1.66
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Orlando Magic": 2.2,
+                        "Philadelphia 76ers": 1.7
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Orlando Magic": 2.18,
+                        "Philadelphia 76ers": 1.72
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:00:00",
+            "home_team": "Orlando Magic",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 5": {
+            "away_team": "Washington Wizards",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Atlanta Hawks": 1.49,
+                        "Washington Wizards": 2.7
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Atlanta Hawks": 1.49,
+                        "Washington Wizards": 2.64
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Atlanta Hawks": 1.4,
+                        "Washington Wizards": 3.05
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Atlanta Hawks": 1.4,
+                        "Washington Wizards": 3.05
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:30:00",
+            "home_team": "Atlanta Hawks",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 6": {
+            "away_team": "Brooklyn Nets",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Brooklyn Nets": 5.9,
+                        "New York Knicks": 1.15
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Brooklyn Nets": 5.23,
+                        "New York Knicks": 1.16
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Brooklyn Nets": 5.1,
+                        "New York Knicks": 1.18
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Brooklyn Nets": 5.6,
+                        "New York Knicks": 1.16
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:30:00",
+            "home_team": "New York Knicks",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 7": {
+            "away_team": "Chicago Bulls",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Chicago Bulls": 4.6,
+                        "Cleveland Cavaliers": 1.21
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:25:57",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Chicago Bulls": 4.52,
+                        "Cleveland Cavaliers": 1.21
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Chicago Bulls": 4.6,
+                        "Cleveland Cavaliers": 1.22
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Chicago Bulls": 4.7,
+                        "Cleveland Cavaliers": 1.21
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:30:00",
+            "home_team": "Cleveland Cavaliers",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        },
+        "Game 8": {
+            "away_team": "Los Angeles Lakers",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Los Angeles Lakers": 1.77,
+                        "San Antonio Spurs": 2.1
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Los Angeles Lakers": 1.74,
+                        "San Antonio Spurs": 2.1
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Los Angeles Lakers": 1.68,
+                        "San Antonio Spurs": 2.26
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:35:30",
+                    "name": "Caesars",
+                    "odds": {
+                        "Los Angeles Lakers": 1.74,
+                        "San Antonio Spurs": 2.15
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Los Angeles Lakers": 1.71,
+                        "San Antonio Spurs": 2.18
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 00:30:00",
+            "home_team": "San Antonio Spurs",
+            "missing_bookmakers": [
+                "LowVig.ag",
+                "BetOnline.ag",
+                "BetMGM",
+                "Bovada"
+            ]
+        },
+        "Game 9": {
+            "away_team": "Denver Nuggets",
+            "bookmakers": [
+                {
+                    "last_update": "2024-11-14 08:38:37",
+                    "name": "DraftKings",
+                    "odds": {
+                        "Denver Nuggets": 1.25,
+                        "New Orleans Pelicans": 4.1
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:36:05",
+                    "name": "MyBookie.ag",
+                    "odds": {
+                        "Denver Nuggets": 1.26,
+                        "New Orleans Pelicans": 3.95
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:38:54",
+                    "name": "FanDuel",
+                    "odds": {
+                        "Denver Nuggets": 1.27,
+                        "New Orleans Pelicans": 3.95
+                    }
+                },
+                {
+                    "last_update": "2024-11-14 08:39:10",
+                    "name": "BetRivers",
+                    "odds": {
+                        "Denver Nuggets": 1.27,
+                        "New Orleans Pelicans": 3.9
+                    }
+                }
+            ],
+            "commence_time": "2024-11-16 01:00:00",
+            "home_team": "New Orleans Pelicans",
+            "missing_bookmakers": [
+                "Bovada",
+                "BetOnline.ag",
+                "Caesars",
+                "LowVig.ag",
+                "BetMGM"
+            ]
+        }
+    },
+    "remaining_requests": "381"
+}

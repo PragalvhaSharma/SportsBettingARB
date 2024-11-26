@@ -1,0 +1,18 @@
+- Cool resources 
+
+- generalized web scraping app using llms
+https://ai.plainenglish.io/building-a-simple-web-scraping-app-with-streamlit-a-step-by-step-guide-a420c6c31938
+
+**Note: 
+- I can multithread the fetching of events from the different API, by saving all possible cursors for kalshi**
+- I can multithread polymarket by multithreading 0-100, 100-200 ... to the limit at the same time
+- O(1) from O(n) 
+
+
+
+
+
+
+
+
+https://colab.research.google.com/drive/1I9gL6VZqpTLUoxnFuBKmVEIy92tOzr3j?usp=sharing
