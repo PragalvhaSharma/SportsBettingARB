@@ -1,27 +1,5 @@
 import json
-from odds_api import getOdds, get_cached_odds, odds_cache
-
-'''
-This function is just for testing if the cache is working properly
-def test_cache():
-    print("\n=== Testing Cache ===")
-    
-    # First call - should fetch from API
-    print("\nFirst call:")
-    odds1 = odds_cache.get_cached_odds("basketball_nba")
-    
-    # Second call within 5 minutes - should use cache
-    print("\nSecond call (should use cache):")
-    odds2 = odds_cache.get_cached_odds("basketball_nba")
-    
-    # Third call with different sport - should fetch new
-    print("\nThird call (different sport):")
-    odds3 = odds_cache.get_cached_odds("basketball_ncaab")
-    
-    # Fourth call to first sport - should still use cache
-    print("\nFourth call (back to NBA, should use cache):")
-    odds4 = odds_cache.get_cached_odds("basketball_nba")
-'''
+from odds_api import getOdds
 
 def main():
     print("Fetching NBA odds data...")

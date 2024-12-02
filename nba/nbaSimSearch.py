@@ -1,8 +1,10 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 import requests
 from typing import Optional
+import pytz
+import glob
 
 polymarketNBA = "jsonOutputs/nbaEvents.json"
 miraNBA = "jsonOutputs/miraNBAEvents.json"
@@ -113,6 +115,24 @@ def calculate_arbitrage_bets(primary_prob: float, poly_prob: float, initial_bet:
         'potential_profit_cad': round(profit_cad, 2),
     }
 
+def convert_to_est(date_str):
+    """Convert date string to EST datetime object"""
+    try:
+        # Try parsing with timezone
+        dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S%z")
+    except ValueError:
+        try:
+            # Try parsing without timezone and assume UTC
+            dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+            dt = dt.replace(tzinfo=timezone.utc)
+        except ValueError:
+            print(f"Warning: Could not parse date {date_str}")
+            raise
+    
+    # Convert to EST
+    est_tz = pytz.timezone('US/Eastern')
+    return dt.astimezone(est_tz)
+
 def find_matching_games():
     print("\nStarting to find matching games...")  # Debug print
     
@@ -154,13 +174,20 @@ def find_matching_games():
     
     # Loop through each Mira game
     for game_id, mira_game in mira_data['odds_data'].items():
-        # Check game date - handle full datetime string
+        # Convert and check game date
         try:
-            game_date = datetime.strptime(mira_game['commence_time'].split('T')[0], '%Y-%m-%d')
-        except ValueError:
-            # Alternative parsing if the first method fails
-            game_date = datetime.strptime(mira_game['commence_time'].split()[0], '%Y-%m-%d')
+            mira_date = datetime.strptime(mira_game['commence_time'], "%Y-%m-%d %H:%M:%S")
+            mira_date = mira_date.replace(tzinfo=timezone.utc)  # Assume UTC if no timezone
+            mira_date_est = mira_date.astimezone(pytz.timezone('US/Eastern'))
             
+            # Skip if game is in the past
+            if mira_date_est < datetime.now(pytz.timezone('US/Eastern')):
+                continue
+                
+        except (ValueError, TypeError) as e:
+            print(f"Error parsing date for game {game_id}: {e}")
+            continue
+        
         # Normalize Mira team names
         mira_teams = {normalize_team_name(team) for team in 
                      ([mira_game['away_team']] + list(mira_game['bookmakers'][0]['odds'].keys()))}
@@ -168,106 +195,127 @@ def find_matching_games():
         
         # Look for matching game in Polymarket data
         for poly_game in poly_data:
-            poly_teams = {normalize_team_name(team) for team in get_teams_from_title(poly_game['title'])}
-            
-            # If teams match (ignoring order)
-            if mira_teams == poly_teams:
-                print(f"\nFound matching game!")
+            try:
+                poly_date = datetime.strptime(poly_game['endDate'], "%Y-%m-%d %H:%M:%S%z")
+                poly_date_est = poly_date.astimezone(pytz.timezone('US/Eastern'))
                 
-                # Store best primary market odds for each team
-                best_primary_odds = {}
-                best_bookmakers = {}  # New dict to track which bookmaker has best odds
-                for team in mira_teams:
-                    best_primary_odds[team] = float('inf')
+                # Skip if Polymarket game is in the past
+                if poly_date_est < datetime.now(pytz.timezone('US/Eastern')):
+                    continue
                 
-                print(f"Mira odds:")
-                for bookmaker in mira_game['bookmakers']:
-                    print(f"\n{bookmaker['name']}:")
-                    total_implied_prob = 0
-                    for team, odds in bookmaker['odds'].items():
-                        normalized_team = normalize_team_name(team)
-                        implied_prob = decimal_to_implied_probability(odds)
-                        total_implied_prob += implied_prob
-                        print(f"{team}: {odds} (implied prob: {implied_prob:.3f})")
-                        # Update best odds and bookmaker if current odds are better
-                        if implied_prob < best_primary_odds[normalized_team]:
-                            best_primary_odds[normalized_team] = implied_prob
-                            best_bookmakers[normalized_team] = bookmaker['name']
-                    print(f"Net implied probability: {total_implied_prob:.3f}")
+                # Compare dates in EST timezone - must be the same day and within 1 hour
+                if (poly_date_est.date() != mira_date_est.date() or 
+                    abs((poly_date_est - mira_date_est).total_seconds()) > 3600):  # 1 hour tolerance
+                    continue
                 
-                print(f"\nPolymarket odds:")
-                outcomes = eval(poly_game['markets'][0]['outcomes'])
-                # Convert string prices to float while preserving precision
-                prices = [float(price.strip('"')) for price in eval(poly_game['markets'][0]['outcomePrices'])]
-                poly_odds = {}
-                total_poly_prob = 0
-                for outcome, prob in zip(outcomes, prices):
-                    print(f"{outcome}: {prob}")  # Print full precision
-                    poly_odds[outcome] = prob
-                    total_poly_prob += prob
-                print(f"Net implied probability: {total_poly_prob}")
+                poly_teams = {normalize_team_name(team) for team in get_teams_from_title(poly_game['title'])}
                 
-                # Check for arbitrage opportunities
-                for poly_team, poly_prob in poly_odds.items():
-                    # Find the opposing team
-                    opposing_teams = mira_teams - {normalize_team_name(poly_team)}
-                    if len(opposing_teams) != 1:
-                        continue
-                    opposing_team = list(opposing_teams)[0]
+                # If teams match (ignoring order)
+                if mira_teams == poly_teams:
+                    print(f"\nFound matching game!")
                     
-                    primary_prob = best_primary_odds[opposing_team]
+                    # Store best primary market odds for each team
+                    best_primary_odds = {}
+                    best_bookmakers = {}  # New dict to track which bookmaker has best odds
+                    for team in mira_teams:
+                        best_primary_odds[team] = float('inf')
                     
-                    # If sum of probabilities is less than 1, we have positive arbitrage
-                    if poly_prob + primary_prob < 1:
-                        bet_details = calculate_arbitrage_bets(primary_prob, poly_prob)
-                        # Calculate decimal odds
-                        poly_decimal = 1 / poly_prob
-                        primary_decimal = 1 / primary_prob
+                    print(f"Mira odds:")
+                    for bookmaker in mira_game['bookmakers']:
+                        print(f"\n{bookmaker['name']}:")
+                        total_implied_prob = 0
+                        for team, odds in bookmaker['odds'].items():
+                            normalized_team = normalize_team_name(team)
+                            implied_prob = decimal_to_implied_probability(odds)
+                            total_implied_prob += implied_prob
+                            print(f"{team}: {odds} (implied prob: {implied_prob:.3f})")
+                            # Update best odds and bookmaker if current odds are better
+                            if implied_prob < best_primary_odds[normalized_team]:
+                                best_primary_odds[normalized_team] = implied_prob
+                                best_bookmakers[normalized_team] = bookmaker['name']
+                        print(f"Net implied probability: {total_implied_prob:.3f}")
+                    
+                    print(f"\nPolymarket odds:")
+                    outcomes = eval(poly_game['markets'][0]['outcomes'])
+                    # Convert string prices to float while preserving precision
+                    prices = [float(price.strip('"')) for price in eval(poly_game['markets'][0]['outcomePrices'])]
+                    poly_odds = {}
+                    total_poly_prob = 0
+                    for outcome, prob in zip(outcomes, prices):
+                        print(f"{outcome}: {prob}")  # Print full precision
+                        poly_odds[outcome] = prob
+                        total_poly_prob += prob
+                    print(f"Net implied probability: {total_poly_prob}")
+                    
+                    # Check for arbitrage opportunities
+                    for poly_team, poly_prob in poly_odds.items():
+                        # Find the opposing team
+                        opposing_teams = mira_teams - {normalize_team_name(poly_team)}
+                        if len(opposing_teams) != 1:
+                            continue
+                        opposing_team = list(opposing_teams)[0]
                         
-                        arb_opportunity = {
-                            'polymarket_team': poly_team,
-                            'polymarket_prob': poly_prob,
-                            'polymarket_decimal': poly_decimal,
-                            'primary_team': opposing_team,
-                            'primary_prob': primary_prob,
-                            'primary_decimal': primary_decimal,
-                            'bookmaker': best_bookmakers[opposing_team],
-                            'total_probability': poly_prob + primary_prob,
-                            'theoretical_profit': ((1 - (poly_prob + primary_prob)) * 100),
-                            'bet_details': bet_details,
-                            'polymarket_date': poly_game['endDate'],
-                            'primary_date': mira_game['commence_time']
-                        }
-                        arbitrage_opportunities.append(arb_opportunity)
+                        primary_prob = best_primary_odds[opposing_team]
                         
-                        print(f"\nARBITRAGE OPPORTUNITY FOUND!")
-                        print(f"Polymarket Team: {poly_team} (odds: {poly_decimal:.2f}, prob: {poly_prob:.3f})")
-                        print(f"Bookmaker: {best_bookmakers[opposing_team]}")
-                        print(f"Primary Market Team: {opposing_team} (odds: {primary_decimal:.2f}, prob: {primary_prob:.3f})")
-                        print(f"Total probability: {poly_prob + primary_prob:.3f}")
-                        print(f"Theoretical profit: {((1 - (poly_prob + primary_prob)) * 100):.2f}%")
-                        print(f"Bet Details:")
-                        print(f"  Primary Market Bet (CAD): ${bet_details['primary_bet_cad']:.2f}")
-                        print(f"  Polymarket Bet (CAD): ${bet_details['polymarket_bet_cad']:.2f}")
-                        print(f"  Polymarket Bet (USD): ${bet_details['polymarket_bet_usd']:.2f}")
-                        print(f"  Theoretical Profit (CAD): ${bet_details['potential_profit_cad']:.2f}")
+                        # If sum of probabilities is less than 1, we have positive arbitrage
+                        if poly_prob + primary_prob < 1:
+                            bet_details = calculate_arbitrage_bets(primary_prob, poly_prob)
+                            # Calculate decimal odds
+                            poly_decimal = 1 / poly_prob
+                            primary_decimal = 1 / primary_prob
+                            
+                            arb_opportunity = {
+                                'polymarket_team': poly_team,
+                                'polymarket_prob': poly_prob,
+                                'polymarket_decimal': poly_decimal,
+                                'primary_team': opposing_team,
+                                'primary_prob': primary_prob,
+                                'primary_decimal': primary_decimal,
+                                'bookmaker': best_bookmakers[opposing_team],
+                                'total_probability': poly_prob + primary_prob,
+                                'theoretical_profit': ((1 - (poly_prob + primary_prob)) * 100),
+                                'bet_details': bet_details,
+                                'polymarket_date': poly_game['endDate'],
+                                'primary_date': mira_game['commence_time']
+                            }
+                            arbitrage_opportunities.append(arb_opportunity)
+                            
+                            print(f"\nARBITRAGE OPPORTUNITY FOUND!")
+                            print(f"Polymarket Team: {poly_team} (odds: {poly_decimal:.2f}, prob: {poly_prob:.3f})")
+                            print(f"Bookmaker: {best_bookmakers[opposing_team]}")
+                            print(f"Primary Market Team: {opposing_team} (odds: {primary_decimal:.2f}, prob: {primary_prob:.3f})")
+                            print(f"Total probability: {poly_prob + primary_prob:.3f}")
+                            print(f"Theoretical profit: {((1 - (poly_prob + primary_prob)) * 100):.2f}%")
+                            print(f"Bet Details:")
+                            print(f"  Primary Market Bet (CAD): ${bet_details['primary_bet_cad']:.2f}")
+                            print(f"  Polymarket Bet (CAD): ${bet_details['polymarket_bet_cad']:.2f}")
+                            print(f"  Polymarket Bet (USD): ${bet_details['polymarket_bet_usd']:.2f}")
+                            print(f"  Theoretical Profit (CAD): ${bet_details['potential_profit_cad']:.2f}")
+                    
+                    print("-" * 50)
                 
-                print("-" * 50)
+            except (ValueError, TypeError, AttributeError) as e:
+                print(f"Error processing dates for game {poly_game.get('title', 'Unknown')}: {e}")
+                continue
 
     # If arbitrage opportunities were found, save them to a file
     if arbitrage_opportunities:
         # Create arbOutput directory if it doesn't exist
         os.makedirs('arbOutput', exist_ok=True)
         
-        # Remove existing files in arbOutput directory
-        for file in os.listdir('arbOutput'):
-            if file.startswith('arbitrage_opportunities_'):
-                os.remove(os.path.join('arbOutput', file))
+        # Delete all existing files in arbOutput directory
+        for file in glob.glob('arbOutput/arbitrage_opportunities_*.txt'):
+            try:
+                os.remove(file)
+                print(f"Deleted previous file: {file}")
+            except Exception as e:
+                print(f"Error deleting file {file}: {e}")
         
-        # Create new file with timestamp
+        # Get current timestamp
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         filename = f'arbOutput/arbitrage_opportunities_{timestamp}.txt'
         
+        # Write new opportunities to file
         with open(filename, 'w') as f:
             f.write("ARBITRAGE OPPORTUNITIES\n\n")
             for opp in arbitrage_opportunities:
@@ -282,9 +330,10 @@ def find_matching_games():
                 f.write(f"Primary Market Bet (CAD): ${opp['bet_details']['primary_bet_cad']:.2f}\n")
                 f.write(f"Polymarket Bet (CAD): ${opp['bet_details']['polymarket_bet_cad']:.2f}\n")
                 f.write(f"Polymarket Bet (USD): ${opp['bet_details']['polymarket_bet_usd']:.2f}\n")
-                f.write(f"Guaranteed Profit (CAD): ${opp['bet_details']['potential_profit_cad']:.2f}\n")
+                f.write(f"Theoretical Profit (CAD): ${opp['bet_details']['potential_profit_cad']:.2f}\n")
                 f.write("-" * 50 + "\n\n")
-    
+        
+        print(f"Wrote new arbitrage opportunities to {filename}")
     else:
         print("-" * 50)
         print("No arbitrage opportunities found")

@@ -16,26 +16,40 @@ def get_nba_events_from_file(file_path):
             data = json.load(file)
 
         nba_events = []
-        current_time = datetime.now(timezone.utc)  # Get current UTC time as timezone-aware
+        current_time = datetime.now(timezone.utc)
+        est_timezone = pytz_timezone('US/Eastern')
+        print("Time Zone", est_timezone)
+        current_time_est = current_time.astimezone(est_timezone)
+        print("Current Time EST", current_time_est)
 
         for event in data:
-            # Check for "NBA" as a standalone word in title, ticker, or description (case-insensitive)
             pattern = r'\b(NBA|nba)\b'
             if any(re.search(pattern, str(event.get(field, ""))) 
                   for field in ["title", "ticker", "description"]):
                 
-                # Skip events that have already ended
                 end_date = event.get("endDate")
                 if end_date:
-                    event_end_time = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%SZ")
-                    event_end_time = event_end_time.replace(tzinfo=utc)  # Make it timezone-aware
-                    if event_end_time < current_time:
+                    try:
+                        # Try parsing with 'T' separator first
+                        event_end_time = datetime.strptime(end_date, "%Y-%m-%dT%H:%M:%S%z")
+                    except ValueError:
+                        try:
+                            # If that fails, try parsing with space separator
+                            event_end_time = datetime.strptime(end_date, "%Y-%m-%d %H:%M:%S%z")
+                        except ValueError:
+                            print(f"Warning: Could not parse date {end_date}")
+                            continue
+
+                    # Skip if event is in the past (using EST timezone)
+                    event_end_time_est = event_end_time.astimezone(est_timezone)
+                    if event_end_time_est < current_time_est:
                         continue
                     
                     # Convert end_date from UTC to EST
                     est_timezone = pytz_timezone('US/Eastern')
                     event_end_time_est = event_end_time.astimezone(est_timezone)
-                    formatted_end_date = event_end_time_est.strftime("%Y-%m-%dT%H:%M:%S%z")  # Format with timezone info
+                    # Format consistently with space separator
+                    formatted_end_date = event_end_time_est.strftime("%Y-%m-%d %H:%M:%S%z")
                 else:
                     formatted_end_date = None
 
@@ -51,7 +65,7 @@ def get_nba_events_from_file(file_path):
 
         # Sorting by the endDate, closest to current time
         nba_events.sort(
-            key=lambda x: abs((datetime.strptime(x["endDate"], "%Y-%m-%dT%H:%M:%S%z") - current_time).total_seconds())
+            key=lambda x: abs((datetime.strptime(x["endDate"], "%Y-%m-%d %H:%M:%S%z") - current_time).total_seconds())
             if x.get("endDate") else float('inf')
         )
 
