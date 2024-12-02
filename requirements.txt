@@ -5,3 +5,4 @@ pytz==2024.1
 py_clob_client==1.0.0
 scipy==1.11.4
 Flask[async]==3.0.0
+pytz==2024.1

@@ -48,7 +48,7 @@ def get_nba_events_from_file(file_path):
                     # Convert end_date from UTC to EST
                     est_timezone = pytz_timezone('US/Eastern')
                     event_end_time_est = event_end_time.astimezone(est_timezone)
-                    # Format consistently with space separator
+                    # Formatting with space separator
                     formatted_end_date = event_end_time_est.strftime("%Y-%m-%d %H:%M:%S%z")
                 else:
                     formatted_end_date = None
