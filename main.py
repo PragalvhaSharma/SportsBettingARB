@@ -17,11 +17,31 @@ DISCORD_WEBHOOK_URL = "https://discordapp.com/api/webhooks/1306538886515785750/J
 def send_to_discord(content, code_block=True):
     if not content.strip():
         return
-        
-    payload = {
-        "content": f"```{content}```" if code_block else content
-    }
-    requests.post(DISCORD_WEBHOOK_URL, json=payload)
+    
+    # Split content into chunks of approximately 1900 characters (Discord limit is 2000)
+    max_length = 1900
+    chunks = []
+    current_chunk = ""
+    
+    for line in content.split('\n'):
+        if len(current_chunk) + len(line) + 2 > max_length:  # +2 for newline chars
+            chunks.append(current_chunk)
+            current_chunk = line
+        else:
+            current_chunk += (line + '\n')
+    
+    if current_chunk:
+        chunks.append(current_chunk)
+    
+    # Send each chunk
+    for chunk in chunks:
+        payload = {
+            "content": f"```{chunk}```" if code_block else chunk
+        }
+        response = requests.post(DISCORD_WEBHOOK_URL, json=payload)
+        if response.status_code != 204:
+            print(f"Failed to send Discord message: {response.status_code}")
+        time.sleep(1)  # Add delay between messages to avoid rate limiting
 
 def send_arbitrage_opportunities():
     # Get the most recent arbitrage file
@@ -32,7 +52,7 @@ def send_arbitrage_opportunities():
     
     # Send current date and time first
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    send_to_discord(f"Arbitrage Opportunities Found at: {current_time}")
+    send_to_discord(f"🔍 New Arbitrage Opportunities Found at: {current_time}", code_block=False)
     
     with open(latest_file, 'r') as file:
         content = file.read()
@@ -44,13 +64,16 @@ def send_arbitrage_opportunities():
             header = opportunities.pop(0)
             send_to_discord(header)
         
-        # Send each opportunity separately
+        # Send each opportunity as a separate message
         for opportunity in opportunities:
-            send_to_discord(opportunity)
+            # Add some spacing and formatting
+            formatted_opp = f"\n{opportunity}\n"
+            send_to_discord(formatted_opp)
+            time.sleep(0.5)  # Small delay between opportunities
     
-    # Add a small delay before sending the final message
-    time.sleep(1)
-    send_to_discord("\n_ _\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ End of Report ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n_ _", code_block=False)
+    # Send footer
+    footer = "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n📊 End of Arbitrage Report 📊\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    send_to_discord(footer, code_block=False)
 
 def fetch_polymarket_events():
     polymarket_api.get_and_save_all_events()
