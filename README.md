@@ -87,12 +87,5 @@ The application will start processing odds data and display arbitrage opportunit
 
 ---
 
-## 🌱 **Future Improvements**
-- 🖥️ GUI Interface for easier usage.
-- ⚙️ Support for additional sportsbooks.
-- 📈 Enhanced performance with parallel API calls.
-
----
-
 **Happy Arbitrage Hunting! 🏆**
 
