@@ -12,7 +12,7 @@ polymarket_api = PolymarketAPI()
 file_path = 'jsonOutputs/gamma_events.json'
 nbaFilePath = 'jsonOutputs/nbaEvents.json'
 
-DISCORD_WEBHOOK_URL = "https://discordapp.com/api/webhooks/1306538886515785750/JIm5CjrQ49Yj5E8MBGOGTGrWvIbojn05jiG3jiGlJs5zlzWt30PZufR_72KI9yidpsGv"
+DISCORD_WEBHOOK_URL = ""
 
 def send_to_discord(content, code_block=True):
     if not content.strip():
